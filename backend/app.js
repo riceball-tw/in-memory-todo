@@ -17,8 +17,8 @@ app.get("/api/todos", (req, res) => {
 // Create Todo
 app.post("/api/todos", (req, res) => {
   const newTodo = {
-    id: Date.now(),
-    title: req.body.title,
+    id: Date.now().toString(),
+    title,
     isCompleted: false
   }
 
@@ -28,7 +28,7 @@ app.post("/api/todos", (req, res) => {
 
 // Edit {id} Todo
 app.put("/api/todos/:id", (req, res) => {
-  const targetId = parseInt(req.params.id)
+  const targetId = req.params.id
   const targetIndex = todos.findIndex(todo => todo.id === targetId);
   const isTargetTodoExist = targetIndex !== -1
 
@@ -54,7 +54,7 @@ app.put("/api/todos/:id", (req, res) => {
 
 // Delete {id} Todo
 app.delete("/api/todos/:id", (req, res) => {
-  const targetId = parseInt(req.params.id)
+  const targetId = req.params.id
   const targetIndex = todos.findIndex(todo => todo.id === targetId);
   const isTargetTodoExist = targetIndex !== -1
 
