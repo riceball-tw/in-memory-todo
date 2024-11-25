@@ -16,6 +16,11 @@ app.get("/api/todos", (req, res) => {
 
 // Create Todo
 app.post("/api/todos", (req, res) => {
+  const { title } = req.body;
+  if (!title || title.trim() === "") {
+    return res.status(400).json({ error: "Title is required and cannot be empty." });
+  }
+
   const newTodo = {
     id: Date.now().toString(),
     title,
