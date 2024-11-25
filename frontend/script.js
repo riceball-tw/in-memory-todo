@@ -110,16 +110,32 @@ async function deleteTodo(id) {
 }
 
 function renderTask(todos) {
-  const todosHTML = todos.map(
-    (todo) => `
-  <li task-id=${todo.id}>
-    <input id=${todo.id} data-task-toggle type="checkbox" ${
-      todo.isCompleted ? "checked" : ""
-    }>
-    <label for=${todo.id}>${todo.title}</label>
-    <button data-task-delete>刪除</button>
-  </li>
-  `
-  );
-  todoList.innerHTML = todosHTML.join("");
+  todoList.innerHTML = "";
+
+  todos.forEach((todo) => {
+    const li = document.createElement("li");
+    li.setAttribute("task-id", todo.id);
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = todo.id;
+    checkbox.dataset.taskToggle = true;
+    if (todo.isCompleted) {
+      checkbox.checked = true;
+    }
+
+    const label = document.createElement("label");
+    label.setAttribute("for", todo.id);
+    label.textContent = todo.title;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.dataset.taskDelete = true;
+    deleteButton.textContent = "Delete";
+
+    li.appendChild(checkbox);
+    li.appendChild(label);
+    li.appendChild(deleteButton);
+
+    todoList.appendChild(li);
+  });
 }
