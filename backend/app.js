@@ -43,8 +43,8 @@ app.put("/api/todos/:id", (req, res) => {
 
   const updatedTodo = {
     ...todos[targetIndex],
-    title: req.body.title ?? targetTodo.title,
-    isCompleted: req.body.isCompleted ?? targetTodo.isCompleted
+    title: req.body.title ?? todos[targetIndex].title,
+    isCompleted: req.body.isCompleted ?? todos[targetIndex].isCompleted
   }
 
   const newTodos = [
